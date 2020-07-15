@@ -28,7 +28,9 @@ else
     $_SESSION['id'] = $usuario[0]['id'];
     $_SESSION['email'] = $email;
     $_SESSION['session_id'] = session_id();
- 
+
+
+
     //echo $email.$_SESSION['email'];
     header("location: ../home.php?page=listado");
  }

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 21-10-2018 a las 08:02:08
--- Versión del servidor: 5.7.23-0ubuntu0.18.04.1
--- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-07-2020 a las 15:14:28
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gallery`
 --
-CREATE DATABASE IF NOT EXISTS `gallery` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `gallery`;
 
 -- --------------------------------------------------------
 
@@ -35,9 +32,19 @@ CREATE TABLE `authors` (
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `enabled` int(2) NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `enabled` int(11) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `authors`
+--
+
+INSERT INTO `authors` (`id`, `name`, `email`, `password`, `enabled`, `created`) VALUES
+(6, 'juan', 'jperez@mail.com', 'a94652aa97c7211ba8954dd15a3cf838', 1, '2020-06-17 12:07:34'),
+(8, 'fede', 'fede@yahoo.es', '7d11810cf99c74a1f3fa22c3879ea39d', 1, '2020-06-17 12:46:08'),
+(9, 'jcarlos', 'jcarlos@mail.com', 'a94652aa97c7211ba8954dd15a3cf838', 1, '2020-06-18 13:09:50'),
+(11, 'chacho', 'chacho@chacho.es', '496c84fb22e82d68fad9e5fe8e89d03d', 1, '2020-07-15 14:07:23');
 
 -- --------------------------------------------------------
 
@@ -53,8 +60,16 @@ CREATE TABLE `images` (
   `size` int(11) NOT NULL,
   `text` text NOT NULL,
   `enabled` int(11) NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `images`
+--
+
+INSERT INTO `images` (`id`, `author_id`, `name`, `file`, `size`, `text`, `enabled`, `created`) VALUES
+(20, 8, 'The blue lagoon', 'the-blue-lagoon-islandia_f0ae7287.jpg', 289181, ' El lago azul de Islandia', 1, '2020-06-17 12:46:43'),
+(21, 6, '', 'reykjavik_6638389c.jpg', 899501, '', 0, '2020-06-18 20:28:11');
 
 --
 -- Índices para tablas volcadas
@@ -64,7 +79,9 @@ CREATE TABLE `images` (
 -- Indices de la tabla `authors`
 --
 ALTER TABLE `authors`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indices de la tabla `images`
@@ -80,13 +97,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT de la tabla `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

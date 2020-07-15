@@ -16,8 +16,7 @@
 
 <body>
 
-
-    <?php
+<?php
 
 
 $page = $_GET['page'];

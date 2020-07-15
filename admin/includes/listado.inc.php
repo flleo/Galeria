@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     function delete_post(id) {
         var ok = confirm("¿ Seguro de borrar esta imagen ? ");
